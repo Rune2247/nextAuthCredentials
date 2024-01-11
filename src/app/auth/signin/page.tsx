@@ -8,11 +8,10 @@ export const SignIn = () => {
 
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async () => {
 		//validate
-		const res = await signIn("credentials", { ...userInfo, redirect: false })
+		const res = await signIn("credentials", { ...userInfo, callbackUrl: "/" })
 
 		if (res && res.ok) {
-			console.log("add redirect")
-			router.push("/")
+			console.log("Okay!")
 		} else {
 			// Show error
 		}

@@ -1,8 +1,15 @@
 "use client"
-import { redirect } from "next/navigation"
-import styles from "./page.module.css"
-import { signIn, useSession } from "next-auth/react"
+import { useSession } from "next-auth/react"
+import { signOut } from "next-auth/react"
 
 export default function Home() {
-	return <p>Home page</p>
+	const { data: session, status } = useSession()
+	console.log(session)
+
+	return (
+		<div>
+			<p>Home page</p>
+			<button onClick={() => signOut()}>Sign out</button>
+		</div>
+	)
 }

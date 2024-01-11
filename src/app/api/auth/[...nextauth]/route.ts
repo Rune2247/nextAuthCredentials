@@ -1,7 +1,8 @@
 import NextAuth from "next-auth/next"
 import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { pages } from "next/dist/build/templates/app-page"
+
+// keycloak: https://next-auth.js.org/providers/keycloak
 
 export const authOptions: NextAuthOptions = {
 	session: {
@@ -15,7 +16,7 @@ export const authOptions: NextAuthOptions = {
 		CredentialsProvider({
 			type: "credentials",
 			credentials: {
-				email: { label: "Email", type: "email" },
+				email: { label: "Email", type: "text" },
 				password: { label: "password", type: "password" }
 			},
 			authorize(credentials, req) {
@@ -41,3 +42,9 @@ export const authOptions: NextAuthOptions = {
 
 const handler = NextAuth(authOptions)
 export { handler as GET, handler as POST }
+function GitHubProvider(arg0: {
+	clientId: string | undefined
+	clientSecret: string | undefined
+}): import("next-auth/providers/index").Provider {
+	throw new Error("Function not implemented.")
+}
