@@ -1,10 +1,8 @@
-import { FormEventHandler, useEffect, useState } from "react"
+import { FormEventHandler, useState } from "react"
 import { signIn } from "next-auth/react"
-import { useRouter } from "next/navigation"
 
 export const SignIn = () => {
 	const [userInfo, setUserInfo] = useState({ email: "", password: "" })
-	const router = useRouter()
 
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async () => {
 		//validate
@@ -25,15 +23,15 @@ export const SignIn = () => {
 					onChange={({ target }) =>
 						setUserInfo({ ...userInfo, email: target.value })
 					}
-				></input>
+				/>
 				<input
 					onChange={({ target }) =>
 						setUserInfo({ ...userInfo, password: target.value })
 					}
 					type="password"
 					value={userInfo.password}
-				></input>
-				<input type="submit"></input>
+				/>
+				<input type="submit" />
 			</form>
 		</div>
 	)

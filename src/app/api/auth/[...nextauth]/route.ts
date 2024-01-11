@@ -1,6 +1,7 @@
 import NextAuth from "next-auth/next"
 import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import GitHubProvider from "next-auth/providers/github"
 
 // keycloak: https://next-auth.js.org/providers/keycloak
 
@@ -26,25 +27,25 @@ export const authOptions: NextAuthOptions = {
 				}
 
 				// Fetch user from external api
-				return { id: "1234", name: "Rune", email: "r@r.dk", role: "user" }
+				return { id: "1234", email: "r@r.dk", role: "user" }
 			}
 		})
 	],
 	callbacks: {
-		jwt(params) {
-			if (params.user?.role) {
-				params.user.role = params.user.role
-			}
-			return params.token
+		jwt({ token }) {
+			return token
 		}
 	}
+	/* 	callbacks: {
+		jwt({ token }) {
+			return token
+		},
+		session({ session, token }) {
+			session.user.role = token.role
+			return session
+		}
+	} */
 }
 
 const handler = NextAuth(authOptions)
 export { handler as GET, handler as POST }
-function GitHubProvider(arg0: {
-	clientId: string | undefined
-	clientSecret: string | undefined
-}): import("next-auth/providers/index").Provider {
-	throw new Error("Function not implemented.")
-}
